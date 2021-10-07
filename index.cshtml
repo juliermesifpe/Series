@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title></title>
+
+    <link href="main.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <div class="logo"><img src="~/Imagem/Logo.jpeg" alt="Logo" /></div>
+
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li><a href="~/index.cshtml">Adicionar</a></li>
+
+                    <li><a href="~/listar.cshtml">Listar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="conteudo">
+        @{
+        if (IsPost)
+        {
+            var genero = Request["nameGenero"];
+            var titulo = Request["nametitulo"];
+            var data = DateTime.Now;
+
+            if (genero == "")
+            {
+                <p>Gênero Inválido</p>
+            }
+            else if (titulo == "")
+            {
+                <p>Título Inválido</p>
+            }
+            else
+            {
+                var dadosGravar = Server.MapPath("~/App_Data/dados.txt");
+
+                File.AppendAllText(dadosGravar, $"{data}#{genero}#{titulo}\n");
+
+                var dadosLastLine = Server.MapPath("~/App_Data/dados.txt");
+                var arrayLastLine = File.ReadAllLines(dadosLastLine);
+                var lastLine = arrayLastLine.LastOrDefault().Split('#');
+
+                if (arrayLastLine.Length != 0)
+                {
+                    <table class="tabela">
+                        <tr>
+                            <th colspan="2">Cadastro Realizado!</th>
+                        </tr>
+                        <tr>
+                            <td>Gênero</td>
+                            <td>Título</td>
+                        </tr>
+
+                        <tr>
+                            <td>@lastLine[1]</td>
+                            <td>@lastLine[2]</td>
+                        </tr>
+                    </table>
+                }
+            }
+
+        }
+
+        else
+        {
+            <form class="formulario" action="" method="post">
+                <h1>Cadastro de Catálogos</h1>
+
+                <label for="idGenero">Gênero</label>
+                <select id="idGenero" name="nameGenero">
+                    <option value=""></option>
+                    <option value="Anime">Anime</option>
+                    <option value="Filme">Filme</option>
+                    <option value="Série">Série</option>
+                </select>
+
+                <label for="idTitulo">Título</label>
+                <input type="text" id="idTitulo" name="nameTitulo" value="" />
+
+                <button type="submit">Adicionar</button>
+
+                <button type="reset">Limpar</button>
+            </form>
+
+            var dadosLista = Server.MapPath("~/App_Data/dados.txt");
+            var arrayLista = File.ReadAllLines(dadosLista);
+
+            if (arrayLista.Length != 0)
+            {
+
+                <table class="tabela">
+                    <tr>
+                        <th colspan="2">Catálogos Cadastrados</th>
+                    </tr>
+                    <tr>
+                        <td>Gênero</td>
+                        <td>Título</td>
+                    </tr>
+
+                    @{
+                    foreach (var item in arrayLista)
+                    {
+                        var lista = item.Split('#');
+
+                        <tr>
+                            <td>@lista[1]</td>
+                            <td>@lista[2]</td>
+                        </tr>
+                    }
+            }
+                </table>
+            }
+        }
+        }
+    </main>
+</body>
+</html>

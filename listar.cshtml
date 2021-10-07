@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title></title>
+
+    <link href="main.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <div class="logo"><img src="Imagem/Logo.jpeg" alt="Logo" /></div>
+
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li><a href="index.cshtml">Adicionar</a></li>
+
+                    <li><a href="listar.cshtml">Listar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+
+    <main class="catalogo">
+        @{
+            var dadosListar = Server.MapPath("~/App_Data/dados.txt");
+            var array = File.ReadAllLines(dadosListar);
+
+
+            if (dadosListar != "")
+            {
+                foreach (var item in array)
+                {
+                    string[] dados = item.Split('#');
+
+                    if (
+                        dados[2] == "The God" ||
+                        dados[2] == "Tate" ||
+                        dados[2] == "One Piece" ||
+                        dados[2] == "Hunter" ||
+                        dados[2] == "Edens Zero" ||
+                        dados[2] == "Boruto" ||
+                        dados[2] == "Black Clover")
+                    {
+                        dados[2] = dados[2] + ".jpg";
+                    }
+                    else {
+                        dados[2] = "indisponivel.png";
+                    }
+
+                    <div class="item">
+                        <img src="~/Imagem/@dados[2]" alt="@dados[1]" />
+                    </div>
+                }
+            }
+
+            /*<table class="tabela">
+                <tr>
+                    <th>Gênero</th>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                    <th>Ano</th>
+                </tr>
+
+                @{
+                if (dadosListar != "")
+                {
+                    foreach (var item in array)
+                    {
+                        string[] dados = item.Split('#');
+
+                    <tr>
+                        <td>@dados[0]</td>
+                        <td>@dados[1]</td>
+                        <td>@dados[2]</td>
+                        <td>@dados[3]</td>
+                    </tr>
+                    }
+                }
+                }
+            </table>*/
+        }
+    </main>
+</body>
+</html>

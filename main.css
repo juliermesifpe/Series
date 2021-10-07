@@ -1,0 +1,119 @@
+﻿*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background-color:gray;
+}
+
+.cabecalho {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: black;
+}
+
+.logo {
+    display: grid;
+    justify-content: center;
+}
+.logo img {
+    width: 400px;
+    height: 20  0px;
+}
+
+.menu {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+.menu nav{
+    
+}
+.menu li{
+    display:inline-block;
+    margin: 0 30px;
+}
+.menu a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: gray;
+}
+.menu a:hover{
+    color: white;
+}
+
+.conteudo {
+    display: grid;
+    justify-content: center;
+    background-color: gray;
+}
+
+.formulario {
+    text-transform: uppercase;
+    background-color: black;
+    color: gray;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 100px 0 0 0;
+}
+.formulario h1{
+    text-align:center;
+}
+.formulario label{
+    display:block;
+    margin: 10px 0;
+}
+.formulario select {
+    display: block;
+    width: 380px;
+    padding: 0 200px 0 0;
+    text-transform:uppercase;
+}
+.formulario input {
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0 200px 0 0;
+    display: block;
+}
+.formulario button {
+    margin: 10px 0 0 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.formulario button:hover {
+    cursor: pointer;
+}
+
+.catalogo {
+    background-color: gray;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(185px, auto));
+    margin: 100px 0 0 0;
+}
+.catalogo .item {
+    display: grid;
+    justify-content: center;
+}
+.catalogo .item img {
+    width: 185px;
+    height: 278px;
+}
+
+.tabela {
+    background-color: black;
+    color: gray;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 100px 0;
+}
+.tabela th{
+    font-size:32px;
+}
+.tabela td{
+   border:solid 1px;
+   color:white;
+}
